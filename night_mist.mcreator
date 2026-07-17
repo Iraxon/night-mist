@@ -19,36 +19,6 @@
       }
     },
     {
-      "name": "NightMistSpread",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "night_mist_spread",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "x",
-            "type": "number"
-          },
-          {
-            "name": "y",
-            "type": "number"
-          },
-          {
-            "name": "z",
-            "type": "number"
-          },
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ],
-        "files": [
-          "src/main/java/net/iraxon/nightmist/procedures/NightMistSpreadProcedure.java"
-        ]
-      }
-    },
-    {
       "name": "NightMistEntityCollidesInTheBlock",
       "type": "procedure",
       "compiles": true,
