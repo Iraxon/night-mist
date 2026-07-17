@@ -1,0 +1,166 @@
+{
+  "_fv": 85,
+  "_type": "block",
+  "definition": {
+    "texture": "night_fog",
+    "textureTop": "",
+    "textureLeft": "",
+    "textureFront": "",
+    "textureRight": "",
+    "textureBack": "",
+    "renderType": 11,
+    "customModelName": "Single texture",
+    "rotationMode": 0,
+    "enablePitch": false,
+    "emissiveRendering": false,
+    "displayFluidOverlay": true,
+    "states": [],
+    "animations": [],
+    "itemTexture": "",
+    "particleTexture": "",
+    "blockSetType": "OAK",
+    "leavesParticleChance": 0.0,
+    "tintType": "No tint",
+    "isItemTinted": false,
+    "hasTransparency": true,
+    "connectedSides": false,
+    "transparencyType": "TRANSLUCENT",
+    "disableOffset": false,
+    "boundingBoxes": [
+      {
+        "mx": 7.0,
+        "my": 7.0,
+        "mz": 7.0,
+        "Mx": 8.0,
+        "My": 8.0,
+        "Mz": 8.0,
+        "subtract": false
+      }
+    ],
+    "customProperties": [],
+    "name": "Night Mist",
+    "specialInformation": {
+      "fixedValue": []
+    },
+    "hardness": 0.0,
+    "resistance": 99999.0,
+    "hasGravity": false,
+    "isWaterloggable": true,
+    "hasBlockItem": false,
+    "maxStackSize": 64,
+    "rarity": "COMMON",
+    "immuneToFire": false,
+    "creativeTabs": [],
+    "destroyTool": "Not specified",
+    "customDrop": {
+      "value": "Blocks.AIR"
+    },
+    "dropAmount": 0,
+    "xpAmountMin": 0,
+    "xpAmountMax": 1,
+    "useLootTableForDrops": false,
+    "requiresCorrectTool": false,
+    "enchantPowerBonus": 0.0,
+    "plantsGrowOn": false,
+    "canRedstoneConnect": false,
+    "hasCustomOpacity": true,
+    "lightOpacity": 13,
+    "tickRate": 0,
+    "tickRandomly": false,
+    "isReplaceable": true,
+    "canProvidePower": true,
+    "emittedRedstonePower": {
+      "fixedValue": 3.0
+    },
+    "colorOnMap": "DEFAULT",
+    "noteBlockInstrument": "harp",
+    "creativePickItem": {
+      "value": ""
+    },
+    "offsetType": "NONE",
+    "aiPathNodeType": "OPEN",
+    "beaconColorModifier": {
+      "value": -65536,
+      "falpha": 0.0
+    },
+    "strippingResult": {
+      "value": ""
+    },
+    "ignitedByLava": false,
+    "flammability": 0,
+    "fireSpreadSpeed": 0,
+    "isLadder": false,
+    "slipperiness": 0.6,
+    "speedFactor": 1.0,
+    "jumpFactor": 1.0,
+    "reactionToPushing": "DESTROY",
+    "isNotColidable": true,
+    "isCustomSoundType": true,
+    "soundOnStep": {
+      "value": "GROUND"
+    },
+    "breakSound": {
+      "value": "block.fire.extinguish"
+    },
+    "fallSound": {
+      "value": "entity.player.attack.nodamage"
+    },
+    "hitSound": {
+      "value": "entity.player.attack.nodamage"
+    },
+    "placeSound": {
+      "value": "block.soul_sand.place"
+    },
+    "stepSound": {
+      "value": "entity.player.attack.nodamage"
+    },
+    "luminance": {
+      "fixedValue": 0.0
+    },
+    "unbreakable": false,
+    "vanillaToolTier": "NONE",
+    "isBonemealable": false,
+    "sensitiveToVibration": false,
+    "vibrationalEvents": [],
+    "vibrationSensitivityRadius": {
+      "fixedValue": 7.0
+    },
+    "hasInventory": false,
+    "openGUIOnRightClick": false,
+    "inventorySize": 9,
+    "inventoryStackSize": 99,
+    "inventoryDropWhenDestroyed": true,
+    "inventoryComparatorPower": true,
+    "inventoryOutSlotIDs": [],
+    "inventoryInSlotIDs": [],
+    "hasEnergyStorage": false,
+    "energyInitial": 0,
+    "energyCapacity": 400000,
+    "energyMaxReceive": 200,
+    "energyMaxExtract": 200,
+    "isFluidTank": false,
+    "fluidCapacity": 8000,
+    "fluidRestrictions": [],
+    "onEntityCollides": {
+      "name": "NightMistEntityCollidesInTheBlock"
+    },
+    "generateFeature": true,
+    "restrictionBiomes": [],
+    "blocksToReplace": [
+      {
+        "value": "Blocks.AIR"
+      },
+      {
+        "value": "Blocks.VOID_AIR"
+      },
+      {
+        "value": "Blocks.CAVE_AIR"
+      }
+    ],
+    "generationShape": "TRIANGLE",
+    "frequencyPerChunks": 20,
+    "frequencyOnChunk": 20,
+    "minGenerateHeight": -128,
+    "maxGenerateHeight": 50
+  }
+}
