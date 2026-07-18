@@ -11,19 +11,28 @@
           "src/main/resources/assets/night_mist/models/block/night_mist.json",
           "src/main/java/net/iraxon/nightmist/block/NightMistBlock.java",
           "src/main/resources/assets/night_mist/blockstates/night_mist.json",
-          "src/main/resources/data/night_mist/worldgen/configured_feature/night_mist.json",
-          "src/main/resources/data/night_mist/worldgen/placed_feature/night_mist.json",
-          "src/main/resources/data/night_mist/forge/biome_modifier/night_mist_biome_modifier.json",
           "src/main/resources/data/night_mist/loot_tables/blocks/night_mist.json"
         ]
       }
     },
     {
-      "name": "NightMistEntityCollidesInTheBlock",
+      "name": "Mist",
+      "type": "damagetype",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "mist",
+      "metadata": {
+        "files": [
+          "src/main/resources/data/night_mist/damage_type/mist.json"
+        ]
+      }
+    },
+    {
+      "name": "PlayerTickUpdate",
       "type": "procedure",
       "compiles": true,
       "locked_code": false,
-      "registry_name": "night_mist_entity_collides_in_the_block",
+      "registry_name": "player_tick_update",
       "metadata": {
         "dependencies": [
           {
@@ -31,12 +40,58 @@
             "type": "entity"
           },
           {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
             "name": "world",
             "type": "world"
           }
         ],
         "files": [
-          "src/main/java/net/iraxon/nightmist/procedures/NightMistEntityCollidesInTheBlockProcedure.java"
+          "src/main/java/net/iraxon/nightmist/procedures/PlayerTickUpdateProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "NightMistBlockDestroyedByPlayer",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "night_mist_block_destroyed_by_player",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/iraxon/nightmist/procedures/NightMistBlockDestroyedByPlayerProcedure.java"
         ]
       }
     }
@@ -51,7 +106,10 @@
   "tab_element_order": {},
   "language_map": {
     "en_us": {
-      "block.night_mist.night_mist": "Night Mist"
+      "block.night_mist.night_mist": "Night Mist",
+      "death.attack.mist.player": "%1$s was driven into the Mist by %2$s",
+      "death.attack.mist": "%1$s breathed the Mist",
+      "death.attack.mist.item": "%1$s was driven into the Mist by %2$s"
     }
   },
   "metadata": {

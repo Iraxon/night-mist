@@ -1,3 +1,6 @@
 {
-  "block.night_mist.night_mist": "Night Mist"
+  "block.night_mist.night_mist": "Night Mist",
+  "death.attack.mist.player": "%1$s was driven into the Mist by %2$s",
+  "death.attack.mist": "%1$s breathed the Mist",
+  "death.attack.mist.item": "%1$s was driven into the Mist by %2$s"
 }

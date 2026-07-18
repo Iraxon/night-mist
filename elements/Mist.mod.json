@@ -1,0 +1,12 @@
+{
+  "_fv": 85,
+  "_type": "damagetype",
+  "definition": {
+    "exhaustion": 0.3,
+    "scaling": "always",
+    "effects": "poking",
+    "normalDeathMessage": "%1$s breathed the Mist",
+    "itemDeathMessage": "%1$s was driven into the Mist by %2$s",
+    "playerDeathMessage": "%1$s was driven into the Mist by %2$s"
+  }
+}
