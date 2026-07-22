@@ -2,5 +2,8 @@
   "block.night_mist.night_mist": "Night Mist",
   "death.attack.mist.player": "%1$s was driven into the Mist by %2$s",
   "death.attack.mist": "%1$s breathed the Mist",
-  "death.attack.mist.item": "%1$s was driven into the Mist by %2$s"
+  "death.attack.mist.item": "%1$s was driven into the Mist by %2$s",
+  "block.night_mist.translucent_night_mist": "Night Mist",
+  "item.night_mist.spectral_flare.description_0": "Use to self-apply Glowing; this protects you from the Mist",
+  "item.night_mist.spectral_flare": "Spectral Flare"
 }

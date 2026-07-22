@@ -29,11 +29,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
 
-public class NightMistBlock extends Block implements SimpleWaterloggedBlock {
+public class TranslucentNightMistBlock extends Block implements SimpleWaterloggedBlock {
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	private static final VoxelShape SHAPE = box(7, 7, 7, 8, 8, 8);
 
-	public NightMistBlock() {
+	public TranslucentNightMistBlock() {
 		super(BlockBehaviour.Properties.of()
 				.sound(new ForgeSoundType(1.0f, 1.0f, () -> ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("block.fire.extinguish")), () -> ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.player.attack.nodamage")),
 						() -> ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("block.soul_sand.place")), () -> ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.player.attack.nodamage")),
@@ -53,13 +53,13 @@ public class NightMistBlock extends Block implements SimpleWaterloggedBlock {
 	}
 
 	@Override
-	public boolean skipRendering(BlockState state, BlockState adjacentBlockState, Direction side) {
-		return adjacentBlockState.getBlock() == this ? true : super.skipRendering(state, adjacentBlockState, side);
+	public boolean propagatesSkylightDown(BlockState state, BlockGetter reader, BlockPos pos) {
+		return state.getFluidState().isEmpty();
 	}
 
 	@Override
 	public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
-		return 2;
+		return propagatesSkylightDown(state, worldIn, pos) ? 0 : 1;
 	}
 
 	@Override

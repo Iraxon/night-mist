@@ -5,11 +5,13 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.event.TickEvent;
 
-import net.minecraft.world.level.block.state.properties.Property;
-import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.GameRules;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.Mth;
@@ -17,15 +19,14 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.network.chat.Component;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.BlockPos;
-
-import net.iraxon.nightmist.init.NightMistModBlocks;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.CommandSource;
 
 import javax.annotation.Nullable;
-
-import java.util.Map;
 
 @Mod.EventBusSubscriber
 public class PlayerTickUpdateProcedure {
@@ -58,10 +59,10 @@ public class PlayerTickUpdateProcedure {
 			found = false;
 			while (sx <= 1) {
 				sy = 0;
-				while (sy <= 2) {
+				while (sy <= 1) {
 					sz = -1;
 					while (sz <= 1) {
-						if (sx * sx + sz * sz < 1.1 * 1.1 && (world.getBlockState(BlockPos.containing(x + sx, y + sy, z + sz))).getBlock() == NightMistModBlocks.NIGHT_MIST.get()) {
+						if (sx * sx + sz * sz < 1.1 * 1.1 && (world.getBlockState(BlockPos.containing(x + sx, y + sy, z + sz))).is(BlockTags.create(new ResourceLocation("night_mist:night_mist")))) {
 							found = true;
 						}
 						sz = sz + 1;
@@ -71,18 +72,26 @@ public class PlayerTickUpdateProcedure {
 				sx = sx + 1;
 			}
 			if (found == true) {
-				entity.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation("night_mist:mist")))), 1);
-				if (world instanceof ServerLevel _level)
-					_level.sendParticles(ParticleTypes.LARGE_SMOKE, x, y, z, 5, 0.125, 0.125, 0.125, 1);
+				if (entity instanceof LivingEntity _livEnt2 && _livEnt2.hasEffect(MobEffects.GLOWING)) {
+					if (world instanceof ServerLevel _level)
+						_level.sendParticles(ParticleTypes.SMOKE, x, y, z, 5, 0.125, 0.125, 0.125, 1);
+					if (world instanceof ServerLevel _level)
+						_level.sendParticles(ParticleTypes.GLOW_SQUID_INK, x, y, z, 2, 0.1, 0.1, 0.1, 0.5);
+				} else {
+					entity.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation("night_mist:mist")))), 1);
+					if (world instanceof ServerLevel _level)
+						_level.sendParticles(ParticleTypes.LARGE_SMOKE, x, y, z, 5, 0.125, 0.125, 0.125, 1);
+				}
 			}
 		}
 		searchCubeRadius = 64;
 		numBlocks = Math.pow(2 * searchCubeRadius, 3);
-		for (int index3 = 0; index3 < (int) (((world.getLevelData().getGameRules().getInt(GameRules.RULE_RANDOMTICKING)) / Math.pow(16, 3)) * numBlocks); index3++) {
+		for (int index3 = 0; index3 < (int) (((3 * (world.getLevelData().getGameRules().getInt(GameRules.RULE_RANDOMTICKING))) / Math.pow(16, 3)) * numBlocks); index3++) {
 			tx = x + Mth.nextInt(RandomSource.create(), (int) (0 - searchCubeRadius), (int) searchCubeRadius);
 			ty = y + Mth.nextInt(RandomSource.create(), (int) (0 - searchCubeRadius), (int) searchCubeRadius);
 			tz = z + Mth.nextInt(RandomSource.create(), (int) (0 - searchCubeRadius), (int) searchCubeRadius);
-			if ((world.getBlockState(BlockPos.containing(tx, ty, tz))).is(BlockTags.create(new ResourceLocation("minecraft:replaceable")))) {
+			if ((world.getBlockState(BlockPos.containing(tx, ty, tz))).is(BlockTags.create(new ResourceLocation("minecraft:replaceable")))
+					&& !(world.getBlockState(BlockPos.containing(tx, ty, tz))).is(BlockTags.create(new ResourceLocation("night_mist:night_mist")))) {
 				if (ty <= Mth.nextInt(RandomSource.create(), 0, 50)) {
 					shouldBecomeMist = true;
 				} else {
@@ -93,7 +102,7 @@ public class PlayerTickUpdateProcedure {
 						while (sy <= 1) {
 							sz = -1;
 							while (sz <= 1) {
-								if (sx * sx + sy * sy + sz * sz < 1.1 * 1.1 && (world.getBlockState(BlockPos.containing(tx + sx, ty + sy, tz + sz))).getBlock() == NightMistModBlocks.NIGHT_MIST.get()) {
+								if (sx * sx + sy * sy + sz * sz < 1.1 * 1.1 && (world.getBlockState(BlockPos.containing(tx + sx, ty + sy, tz + sz))).is(BlockTags.create(new ResourceLocation("night_mist:night_mist")))) {
 									shouldBecomeMist = true;
 									break;
 								}
@@ -105,22 +114,17 @@ public class PlayerTickUpdateProcedure {
 					}
 				}
 				if (shouldBecomeMist) {
-					{
-						BlockPos _bp = BlockPos.containing(tx, ty, tz);
-						BlockState _bs = NightMistModBlocks.NIGHT_MIST.get().defaultBlockState();
-						BlockState _bso = world.getBlockState(_bp);
-						for (Map.Entry<Property<?>, Comparable<?>> entry : _bso.getValues().entrySet()) {
-							Property _property = _bs.getBlock().getStateDefinition().getProperty(entry.getKey().getName());
-							if (_property != null && _bs.getValue(_property) != null)
-								try {
-									_bs = _bs.setValue(_property, (Comparable) entry.getValue());
-								} catch (Exception e) {
-								}
-						}
-						world.setBlock(_bp, _bs, 3);
-					}
+					if (world instanceof ServerLevel _level)
+						_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(tx, ty, tz), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+								"setblock ~ ~ ~ night_mist:night_mist destroy");
 				}
 			}
 		}
+		if (world instanceof ServerLevel _level)
+			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+					"fill ~-15 ~-15 ~-15 ~15 ~15 ~15 night_mist:night_mist replace night_mist:translucent_night_mist");
+		if (world instanceof ServerLevel _level)
+			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+					"fill ~-7 ~-7 ~-7 ~7 ~7 ~7 night_mist:translucent_night_mist replace night_mist:night_mist");
 	}
 }

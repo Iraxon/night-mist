@@ -23,8 +23,8 @@
     "tintType": "No tint",
     "isItemTinted": false,
     "hasTransparency": true,
-    "connectedSides": true,
-    "transparencyType": "SOLID",
+    "connectedSides": false,
+    "transparencyType": "TRANSLUCENT",
     "disableOffset": false,
     "boundingBoxes": [
       {
@@ -64,7 +64,7 @@
     "plantsGrowOn": false,
     "canRedstoneConnect": true,
     "hasCustomOpacity": true,
-    "lightOpacity": 2,
+    "lightOpacity": 0,
     "tickRate": 0,
     "tickRandomly": false,
     "isReplaceable": true,

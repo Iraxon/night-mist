@@ -1,14 +1,15 @@
 modLoader="javafml"
 loaderVersion="[47,)"
-license="Not specified"
+license="GNU General Public License version 3 (GPLv3)"
 
 [[mods]]
 modId="night_mist"
 version="1.0.0"
 displayName="Night Mist"
-displayURL="https://mcreator.net"
-credits="Created using mod maker MCreator - https://mcreator.net/about"
-authors="MCreator"
+displayURL="https://github.com/Iraxon/night-mist"
+credits="Some visuals by Tayoes"
+authors="COMMANDO66/Iraxon"
+description="The Mist spreads and damages players."
 
 # Start of user code block mod configuration
 # End of user code block mod configuration

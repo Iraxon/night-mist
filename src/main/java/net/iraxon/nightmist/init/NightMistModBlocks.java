@@ -9,14 +9,17 @@ import net.minecraftforge.registries.DeferredRegister;
 
 import net.minecraft.world.level.block.Block;
 
+import net.iraxon.nightmist.block.TranslucentNightMistBlock;
 import net.iraxon.nightmist.block.NightMistBlock;
 import net.iraxon.nightmist.NightMistMod;
 
 public class NightMistModBlocks {
 	public static final DeferredRegister<Block> REGISTRY = DeferredRegister.create(ForgeRegistries.BLOCKS, NightMistMod.MODID);
 	public static final RegistryObject<Block> NIGHT_MIST;
+	public static final RegistryObject<Block> TRANSLUCENT_NIGHT_MIST;
 	static {
 		NIGHT_MIST = REGISTRY.register("night_mist", NightMistBlock::new);
+		TRANSLUCENT_NIGHT_MIST = REGISTRY.register("translucent_night_mist", TranslucentNightMistBlock::new);
 	}
 	// Start of user code block custom blocks
 	// End of user code block custom blocks

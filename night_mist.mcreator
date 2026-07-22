@@ -62,11 +62,39 @@
       }
     },
     {
-      "name": "NightMistBlockDestroyedByPlayer",
+      "name": "TranslucentNightMist",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "translucent_night_mist",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/night_mist/models/block/translucent_night_mist.json",
+          "src/main/resources/data/night_mist/loot_tables/blocks/translucent_night_mist.json",
+          "src/main/java/net/iraxon/nightmist/block/TranslucentNightMistBlock.java",
+          "src/main/resources/assets/night_mist/blockstates/translucent_night_mist.json"
+        ]
+      }
+    },
+    {
+      "name": "SpectralFlare",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spectral_flare",
+      "metadata": {
+        "files": [
+          "src/main/java/net/iraxon/nightmist/item/SpectralFlareItem.java",
+          "src/main/resources/assets/night_mist/models/item/spectral_flare.json"
+        ]
+      }
+    },
+    {
+      "name": "UseSpectralFlare",
       "type": "procedure",
       "compiles": true,
       "locked_code": false,
-      "registry_name": "night_mist_block_destroyed_by_player",
+      "registry_name": "use_spectral_flare",
       "metadata": {
         "dependencies": [
           {
@@ -74,24 +102,48 @@
             "type": "entity"
           },
           {
-            "name": "x",
-            "type": "number"
-          },
-          {
-            "name": "y",
-            "type": "number"
-          },
-          {
-            "name": "z",
-            "type": "number"
-          },
-          {
-            "name": "world",
-            "type": "world"
+            "name": "itemstack",
+            "type": "itemstack"
           }
         ],
         "files": [
-          "src/main/java/net/iraxon/nightmist/procedures/NightMistBlockDestroyedByPlayerProcedure.java"
+          "src/main/java/net/iraxon/nightmist/procedures/UseSpectralFlareProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "SpectralFlareMake",
+      "type": "recipe",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spectral_flare_make",
+      "metadata": {
+        "files": [
+          "src/main/resources/data/night_mist/recipes/spectral_flare_make.json"
+        ]
+      }
+    },
+    {
+      "name": "SpectralFlareMakeGlowInk",
+      "type": "recipe",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spectral_flare_make_glow_ink",
+      "metadata": {
+        "files": [
+          "src/main/resources/data/night_mist/recipes/spectral_flare_make_glow_ink.json"
+        ]
+      }
+    },
+    {
+      "name": "SpectralFlareMakeGlowBerry",
+      "type": "recipe",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spectral_flare_make_glow_berry",
+      "metadata": {
+        "files": [
+          "src/main/resources/data/night_mist/recipes/spectral_flare_make_glow_berry.json"
         ]
       }
     }
@@ -100,7 +152,12 @@
   "sound_elements": [],
   "tag_elements": {
     "BLOCKS:minecraft:replaceable": [
+      "~CUSTOM:TranslucentNightMist",
       "~CUSTOM:NightMist"
+    ],
+    "BLOCKS:mod:night_mist": [
+      "CUSTOM:NightMist",
+      "CUSTOM:TranslucentNightMist"
     ]
   },
   "tab_element_order": {},
@@ -109,12 +166,16 @@
       "block.night_mist.night_mist": "Night Mist",
       "death.attack.mist.player": "%1$s was driven into the Mist by %2$s",
       "death.attack.mist": "%1$s breathed the Mist",
-      "death.attack.mist.item": "%1$s was driven into the Mist by %2$s"
+      "death.attack.mist.item": "%1$s was driven into the Mist by %2$s",
+      "block.night_mist.translucent_night_mist": "Night Mist",
+      "item.night_mist.spectral_flare.description_0": "Use to self-apply Glowing; this protects you from the Mist",
+      "item.night_mist.spectral_flare": "Spectral Flare"
     }
   },
   "metadata": {
     "files": [
       "src/main/java/net/iraxon/nightmist/init/NightMistModBlocks.java",
+      "src/main/java/net/iraxon/nightmist/init/NightMistModItems.java",
       "src/main/java/net/iraxon/nightmist/NightMistMod.java",
       "src/main/resources/pack.mcmeta",
       "src/main/resources/META-INF/mods.toml"
@@ -128,15 +189,17 @@
     "modid": "night_mist",
     "modName": "Night Mist",
     "version": "1.0.0",
-    "author": "MCreator",
-    "websiteURL": "https://mcreator.net",
-    "license": "Not specified",
+    "description": "The Mist spreads and damages players.",
+    "author": "COMMANDO66/Iraxon",
+    "websiteURL": "https://github.com/Iraxon/night-mist",
+    "license": "GNU General Public License version 3 (GPLv3)",
     "serverSideOnly": false,
     "requiredMods": [],
     "dependencies": [],
     "dependants": [],
     "mcreatorDependencies": [],
     "currentGenerator": "forge-1.20.1",
+    "credits": "Some visuals by Tayoes",
     "modElementsPackage": "net.iraxon.nightmist"
   },
   "mcreatorVersion": 202600114619

@@ -18,6 +18,7 @@ import net.minecraft.server.TickTask;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.FriendlyByteBuf;
 
+import net.iraxon.nightmist.init.NightMistModItems;
 import net.iraxon.nightmist.init.NightMistModBlocks;
 
 import java.util.function.Supplier;
@@ -42,6 +43,7 @@ public class NightMistMod {
 		MinecraftForge.EVENT_BUS.register(this);
 		IEventBus bus = context.getModEventBus();
 		NightMistModBlocks.REGISTRY.register(bus);
+		NightMistModItems.REGISTRY.register(bus);
 		// Start of user code block mod init
 		// End of user code block mod init
 	}
